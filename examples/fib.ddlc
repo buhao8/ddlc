@@ -1,0 +1,11 @@
+poem fib(n)
+    desire n == 0
+        sayonara 0
+    love me n == 1
+        sayonara 1
+    stab
+        sayonara fib(n-1) + fib(n-2)
+    seppuku
+goodbye
+
+writeln fib(10)

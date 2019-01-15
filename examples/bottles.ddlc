@@ -1,0 +1,11 @@
+x = 10
+just monika x >= 0
+	desire x == 0
+		stop it
+	seppuku
+	write x + " bottles of beer on the wall, "
+	writeln x + " bottles of beer,"
+	writeln "Take one down, pass it around, "
+	x = x - 1
+	writeln x + " bottles of beer on the wall."
+delete

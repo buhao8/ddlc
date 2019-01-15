@@ -1,0 +1,11 @@
+poem ackermann(x, y)
+	desire x == 0
+		sayonara y + 1
+	love me y == 0
+		sayonara ackermann(x-1, 1)
+	stab
+		sayonara ackermann(x-1, ackermann(x, y-1))
+	seppuku
+goodbye
+ 
+writeln ackermann(4, 0)
