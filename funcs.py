@@ -9,5 +9,6 @@ operators = {
 	'/': lambda a, b: a/b,
 	'%': lambda a, b: a%b,
 	'PRINT': print,
-	'PRINTLN': print
+	'PRINTLN': print,
+	'READ': raw_input
 }

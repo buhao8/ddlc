@@ -15,10 +15,12 @@ class Node(object):
 class Unary(Node):
 	def eval(self):
 		### print with no '\n'
-		if (callable(self.children[0]) and 
-			self.children[0].__name__=='print' and len(self.children)==3):
+		if callable(self.children[0]): 
+			if self.children[0].__name__=='print' and len(self.children)==3:
 				return self.children[0](self.children[1].eval(), end='')
-				
+			elif self.children[0].__name__=='raw_input':
+				return raw_input()	
+
 		return self.children[0](self.children[1].eval())
 
 class Binary(Node):

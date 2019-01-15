@@ -79,7 +79,7 @@ def p_continue(p):
 	'''continue : CONTINUE1 CONTINUE2'''
 	p[0] = Literal(CONTINUE)
 
-### assignments and output ###
+### assignments and IO ###
 def p_assign(p):
 	'''assign : NAME EQUALS expr'''
 	print p[3]
@@ -95,8 +95,8 @@ def p_print(p):
 
 def p_read(p):
 	'''read : READ NAME'''
-	x = raw_input()
-	p[0] = Assign(p[2], Literal(x))
+	x = Unary(operators[p[1]])
+	p[0] = Assign(p[2], x)
 
 ### numbers and data ###
 def p_expr_uminus(p):
