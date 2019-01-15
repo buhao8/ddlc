@@ -104,7 +104,11 @@ It can be called thusly:
 They can also be assigned to a variable or directly printed.
 
 # IO
-There is currently no support for user-input.
+Input is done with the following:
+
+`read var`
+
+It literally reads a value from the console and stores it in var.
 
 Output is done with the following:
 
