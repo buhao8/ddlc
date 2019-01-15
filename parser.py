@@ -12,15 +12,15 @@ precedence = (
 	('nonassoc', 'LESSTHAN', 'GREATERTHAN', 'COMPARE',
 		'LTEQUAL', 'GTEQUAL', 'NOTEQUAL'),
 	('left', 'PLUS', 'MINUS'),
-	('left', 'TIMES', 'DIVIDE'),
+	('left', 'TIMES', 'DIVIDE', 'MODULO'),
+	('right', 'UMINUS'),
 	('left', 'LPAREN'),
-	('right', 'UMINUS')
 )
 
 ### blocks and statements ###
 def p_block(p):
 	'''block : block statement
-			 | statement'''
+			| statement'''
 	if len(p)==3:
 		p[1].append_child(p[2])
 		p[0] = p[1]
@@ -29,20 +29,20 @@ def p_block(p):
 
 def p_statement(p):
 	'''statement : assign newline
-				 | expr newline
-				 | print newline
-				 | if newline
-				 | continue newline
-				 | break newline
-				 | while newline
-				 | return newline
-				 | funcdef newline'''
+			| expr newline
+			| print newline
+			| if newline
+			| continue newline
+			| break newline
+			| while newline
+			| return newline
+			| funcdef newline'''
 	p[0] = p[1]
 
 ### if - elif - else ###
 def p_if_chain(p):
 	'''if_chain : if_chain ELIF1 ELIF2 expr newline block
-				| IF expr newline block'''
+			| IF expr newline block'''
 	if len(p)==5:
 		p[0] = If_Chain((p[2], p[4]))
 
@@ -56,7 +56,7 @@ def p_else(p):
 
 def p_if(p):
 	'''if : if_chain ENDIF
-		  | if_chain else'''
+		| if_chain else'''
 	if p[2]!='ENDIF':
 		p[1].append_child(p[2])
 	p[0] = p[1]
@@ -85,8 +85,7 @@ def p_assign(p):
 
 def p_print(p):
 	'''print : PRINT expr
-			| PRINTLN expr'''
-	#print p[2]
+		| PRINTLN expr'''
 	if p[1] == 'PRINT':
 		p[0] = Unary(operators[p[1]], p[2], "")
 	else:
@@ -100,9 +99,10 @@ def p_expr_uminus(p):
 
 def p_binary_expression(p):
 	'''expr : expr PLUS expr
-			| expr MINUS expr
-			| expr TIMES expr
-			| expr DIVIDE expr'''
+		| expr MINUS expr
+		| expr TIMES expr
+		| expr DIVIDE expr
+		| expr MODULO expr'''
 	p[0] = Binary(operators[p[2]], p[1], p[3])
 
 def p_parens(p):
@@ -115,39 +115,36 @@ def p_name(p):
 
 def p_compare(p):
 	'''expr : expr COMPARE expr
-			| expr LESSTHAN expr
-			| expr GREATERTHAN expr
-			| expr LTEQUAL expr
-			| expr GTEQUAL expr
-			| expr NOTEQUAL expr'''
+		| expr LESSTHAN expr
+		| expr GREATERTHAN expr
+		| expr LTEQUAL expr
+		| expr GTEQUAL expr
+		| expr NOTEQUAL expr'''
 	p[0] = Compare(p[1], p[3], p[2])
 
 def p_factor(p):
 	'''expr : INT
-			| FLOAT
-			| STRING'''
-	#p[0] = p[1]
+		| FLOAT
+		| STRING'''
 	p[0] = Literal(p[1][1:-1]if isinstance(p[1], str) else p[1])
 
 ### functions ###
 def p_val_seq(p):
 	'''valseq : valseq COMMA expr
-			  | expr'''
+		| expr'''
 	if len(p)==2:
-		p[0] = p[1],
-
+		p[0] = p[1]
 	else:
-		p[1] += p[3],
+		p[1] += p[3]
 		p[0] = p[1]
 
 def p_name_seq(p):
 	'''nameseq : nameseq COMMA NAME
-			   | NAME'''
+		| NAME'''
 	if len(p)==2:
-		p[0] = p[1],
-
+		p[0] = p[1]
 	else:
-		p[1] += p[3],
+		p[1] += p[3]
 		p[0] = p[1]
 
 def p_funcdef(p):
@@ -161,7 +158,7 @@ def p_call(p):
 
 def p_newline(p):
 	'''newline : NEWLINE
-				| newline NEWLINE'''
+		| newline NEWLINE'''
 	pass
 
 def p_error(p):

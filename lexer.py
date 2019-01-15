@@ -29,8 +29,8 @@ reserved = {
 
 
 tokens = [ 'NAME', 'INT', 'FLOAT', 'PLUS', 'MINUS', 'TIMES', 
-			'DIVIDE', 'LPAREN', 'RPAREN', 'EQUALS', 'STRING',
-			'NEWLINE', 'LESSTHAN', 'GREATERTHAN', 'COMPARE',
+			'DIVIDE', 'MODULO', 'LPAREN', 'RPAREN', 'EQUALS', 
+			'STRING', 'NEWLINE', 'LESSTHAN', 'GREATERTHAN', 'COMPARE',
 			'LTEQUAL', 'GTEQUAL', 'NOTEQUAL', 'COMMA'] + list(reserved.values())
 
 
@@ -40,6 +40,7 @@ t_PLUS        = r'\+'
 t_MINUS       = r'-'
 t_TIMES       = r'\*'
 t_DIVIDE      = r'/'
+t_MODULO      = r'\%'
 t_LPAREN      = r'\('
 t_RPAREN      = r'\)'
 t_EQUALS      = r'\='
