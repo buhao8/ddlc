@@ -131,4 +131,4 @@ $ python parser.py -h
 - Arrays
 - Include directive
 - Library functions
-~~- Modulo support~~
+- ~~Modulo support~~
