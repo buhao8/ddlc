@@ -1,0 +1,3 @@
+write "Hi there, what's your name? "
+read name
+writeln "Hi " + name + ", nice to meet you!"
