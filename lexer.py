@@ -25,6 +25,8 @@ reserved = {
 
 	'poem'		:	'FUNC',
 	'goodbye'	:	'ENDFUNC',
+
+	'read'		:	'READ',
 }
 
 

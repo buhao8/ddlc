@@ -31,6 +31,7 @@ def p_statement(p):
 	'''statement : assign newline
 			| expr newline
 			| print newline
+			| read newline
 			| if newline
 			| continue newline
 			| break newline
@@ -81,6 +82,7 @@ def p_continue(p):
 ### assignments and output ###
 def p_assign(p):
 	'''assign : NAME EQUALS expr'''
+	print p[3]
 	p[0] = Assign(p[1], p[3])
 
 def p_print(p):
@@ -90,6 +92,11 @@ def p_print(p):
 		p[0] = Unary(operators[p[1]], p[2], "")
 	else:
 		p[0] = Unary(operators[p[1]], p[2])
+
+def p_read(p):
+	'''read : READ NAME'''
+	x = raw_input()
+	p[0] = Assign(p[2], Literal(x))
 
 ### numbers and data ###
 def p_expr_uminus(p):
