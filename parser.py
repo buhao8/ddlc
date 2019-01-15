@@ -82,7 +82,6 @@ def p_continue(p):
 ### assignments and IO ###
 def p_assign(p):
 	'''assign : NAME EQUALS expr'''
-	print p[3]
 	p[0] = Assign(p[1], p[3])
 
 def p_print(p):

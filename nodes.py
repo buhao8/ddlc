@@ -1,3 +1,5 @@
+from ast import literal_eval
+
 CONTINUE = object()
 BREAK = object()
 RETURN = type('Return Value', (), {})
@@ -19,7 +21,11 @@ class Unary(Node):
 			if self.children[0].__name__=='print' and len(self.children)==3:
 				return self.children[0](self.children[1].eval(), end='')
 			elif self.children[0].__name__=='raw_input':
-				return raw_input()	
+				x = raw_input()
+				try:
+					return literal_eval(x)
+				except:
+					return x
 
 		return self.children[0](self.children[1].eval())
 
