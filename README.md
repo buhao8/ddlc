@@ -125,7 +125,7 @@ $ python parser.py -h
 
 # Todo
 - Fix interactive mode
-- Add user input support
+- ~~Add user input support~~
 - Better error reporting
 - Varargs and kwargs
 - Arrays
