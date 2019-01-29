@@ -5,6 +5,9 @@ Note: The (default) interactive mode is not fully functional due to recently cha
 
 See `examples/` for example scripts.
 
+# Purpose
+The purpose of this language is to have a ddlc-themed programming language that tries to keep true to the various themes found in ddlc.  The choice of Python as the host language was chosen primarily due to previous projects using PLY (Python-Lex-Yacc).  It is important to note that the language is not meant to be fast nor efficient.
+
 # Comments
 Comments are denoted by # like in Python, or quoted text. For example,
 
